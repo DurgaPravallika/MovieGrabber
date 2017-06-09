@@ -11,6 +11,9 @@ import {MoviesService} from '../movies.service';
 export class GenresComponent implements OnInit {
   title: string;
   movies: Object;
+  searchRes: Array<Object>;
+  searchStr1: string;
+  searchStr2: string;
 
   constructor(
     private _moviesServices: MoviesService,
@@ -25,6 +28,14 @@ export class GenresComponent implements OnInit {
       this._moviesServices.getMoviesByGenre(id).subscribe(res => {
         this.movies = res.results;
       });
+    })
+  }
+   searchMoviesMultiple() {
+    this.router.params.subscribe((params) => {
+      const id = params['id'];
+    this._moviesService.searchMoviesMultiple(id,this.searchStr1,this.searchStr2).subscribe(res => {
+      this.searchRes = res.results;
+    });
     })
   }
 
