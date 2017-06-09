@@ -16,7 +16,7 @@ export class GenresComponent implements OnInit {
   searchStr2: string;
 
   constructor(
-    private _moviesServices: MoviesService,
+    private _moviesService: MoviesService,
     private router: ActivatedRoute ) {
 
   }
@@ -25,7 +25,7 @@ export class GenresComponent implements OnInit {
     this.router.params.subscribe((params) => {
       const id = params['id'];
       this.title = params['name'];
-      this._moviesServices.getMoviesByGenre(id).subscribe(res => {
+      this._moviesService.getMoviesByGenre(id).subscribe(res => {
         this.movies = res.results;
       });
     })
