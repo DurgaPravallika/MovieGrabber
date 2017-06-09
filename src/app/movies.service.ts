@@ -52,6 +52,18 @@ export class MoviesService {
         return res.json();
       })
   }
+  searchMoviesMultiple(id: string,searchStr1: string,searchStr2: string) {
+    var search = new URLSearchParams();
+    search.set('sort_by','popularity.desc');
+    search.set('with_genres', id);
+    search.set('language', searchStr1);
+    search.set('year', searchStr2);
+    search.set('api_key', this.apikey);
+    return this._jsonp.get('https://api.themoviedb.org/3/discover/movie?callback=JSONP_CALLBACK', {search})
+      .map(res => {
+        return res.json();
+      })
+  }
    searchByLanguage(searchStr: string) {
      var search = new URLSearchParams();
      search.set('sort_by','popularity.desc');
